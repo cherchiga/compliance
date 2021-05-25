@@ -46,7 +46,7 @@ if auth_token:
     for device in inventory_json: 
         system_macs.append(device["systemMacAddress"])
 
-    MAX_RUNNERS = 5
+    MAX_RUNNERS = 10
     counter = 0
     batch = list()
     devices_non_compliant = list()
@@ -66,10 +66,11 @@ if auth_token:
         batch.clear()
 
 slack_webhook_url = ("https://hooks.slack.com/services/T0534H08D/" + 
-                     "B01QX5EJU05/54t50N5kNR6kGNl0ZAuYd5l3")                
+                     "B022UCBPU06/ueaohNoGR6Tz5x0ms9p4MYT5")
 if devices_non_compliant:
     slack_message = ("The following devices are out of compliance:\n" + 
-                 "\n".join(devices_non_compliant)) 
+                 "\n".join(devices_non_compliant))
+    print(slack_message)
     payload = {"text": slack_message}
     encoded_payload = json.dumps(payload).encode('utf-8')
     r = http.request("POST", slack_webhook_url,
